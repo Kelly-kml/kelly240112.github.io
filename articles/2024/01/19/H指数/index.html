@@ -20,23 +20,21 @@
     var CONFIG = {"hostname":"kelly-kml.github.io","root":"/kelly240112.github.io/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="vue Diff头头 diff - 尾尾 diff - 交叉 diff 原则：同一层级的比较 - 不同类型的就认为不一样的，直接删除 - 同一个 key 的比较  React Diff1.是什么？针对两颗Virtual DOM进行的对比，查找其中的差异，然后根据差异性来更新页面；其特性是深度优先，同层级比较  2.基本实现思路： Diff 的入口函数是 reconcileChildFibers：会">
+  <meta name="description" content="H 指数H 指数的概念：h 代表“高引用次数” ，一名科研人员的 h 指数 是指他（她）至少发表了 h 篇论文，并且 至少 有 h 篇论文被引用次数大于等于 h 。如果 h 有多种可能的值，h 指数 是其中最大的那个。 输入：citations &#x3D; [3,0,6,1,5] 输出：3 解释：给定数组表示研究者总共有 5 篇论文，每篇论文相应的被引用了 3, 0, 6, 1, 5 次。 由于">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈 Diff 算法">
-<meta property="og:url" content="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/13/React-Diff/index.html">
+<meta property="og:title" content="H指数">
+<meta property="og:url" content="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/19/H%E6%8C%87%E6%95%B0/index.html">
 <meta property="og:site_name" content="宫崎骏的捣蛋野孩子">
-<meta property="og:description" content="vue Diff头头 diff - 尾尾 diff - 交叉 diff 原则：同一层级的比较 - 不同类型的就认为不一样的，直接删除 - 同一个 key 的比较  React Diff1.是什么？针对两颗Virtual DOM进行的对比，查找其中的差异，然后根据差异性来更新页面；其特性是深度优先，同层级比较  2.基本实现思路： Diff 的入口函数是 reconcileChildFibers：会">
+<meta property="og:description" content="H 指数H 指数的概念：h 代表“高引用次数” ，一名科研人员的 h 指数 是指他（她）至少发表了 h 篇论文，并且 至少 有 h 篇论文被引用次数大于等于 h 。如果 h 有多种可能的值，h 指数 是其中最大的那个。 输入：citations &#x3D; [3,0,6,1,5] 输出：3 解释：给定数组表示研究者总共有 5 篇论文，每篇论文相应的被引用了 3, 0, 6, 1, 5 次。 由于">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c236f218ba784e9cb81b3ca3a2cb6f46~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1797&h=1906&s=251439&e=png&b=ffffff">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54ebec02e088424ab5bbadfa0f7a2c43~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1738&h=1587&s=265583&e=png&b=fefefe">
-<meta property="article:published_time" content="2024-01-13T04:17:59.000Z">
-<meta property="article:modified_time" content="2024-01-13T10:12:43.429Z">
+<meta property="article:published_time" content="2024-01-19T14:44:00.000Z">
+<meta property="article:modified_time" content="2024-01-20T16:01:53.516Z">
 <meta property="article:author" content="kelly">
-<meta property="article:tag" content="Diff">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c236f218ba784e9cb81b3ca3a2cb6f46~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1797&h=1906&s=251439&e=png&b=ffffff">
 
-<link rel="canonical" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/13/React-Diff/">
+<link rel="canonical" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/19/H%E6%8C%87%E6%95%B0/">
 
 
 <script id="page-configurations">
@@ -49,7 +47,7 @@
   };
 </script>
 
-  <title>浅谈 Diff 算法 | 宫崎骏的捣蛋野孩子</title>
+  <title>H指数 | 宫崎骏的捣蛋野孩子</title>
   
 
 
@@ -196,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/13/React-Diff/">
+    <link itemprop="mainEntityOfPage" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/19/H%E6%8C%87%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/kelly240112.github.io/images/avatar.jpg">
@@ -209,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          浅谈 Diff 算法
+          H指数
         </h1>
 
         <div class="post-meta">
@@ -218,17 +216,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-13 12:17:59 / 修改时间：18:12:43" itemprop="dateCreated datePublished" datetime="2024-01-13T12:17:59+08:00">2024-01-13</time>
+              <time title="创建时间：2024-01-19 22:44:00" itemprop="dateCreated datePublished" datetime="2024-01-19T22:44:00+08:00">2024-01-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-21 00:01:53" itemprop="dateModified" datetime="2024-01-21T00:01:53+08:00">2024-01-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/kelly240112.github.io/categories/React%E6%BA%90%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">React源码</span></a>
+                  <a href="/kelly240112.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
                 </span>
             </span>
 
@@ -250,65 +254,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="vue-Diff"><a href="#vue-Diff" class="headerlink" title="vue Diff"></a>vue Diff</h2><p>头头 diff - 尾尾 diff - 交叉 diff</p>
-<p>原则：同一层级的比较 - 不同类型的就认为不一样的，直接删除 - 同一个 key 的比较</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c236f218ba784e9cb81b3ca3a2cb6f46~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1797&h=1906&s=251439&e=png&b=ffffff"></p>
-<h2 id="React-Diff"><a href="#React-Diff" class="headerlink" title="React Diff"></a>React Diff</h2><h3 id="1-是什么？"><a href="#1-是什么？" class="headerlink" title="1.是什么？"></a>1.是什么？</h3><pre><code>针对两颗Virtual DOM进行的对比，查找其中的差异，然后根据差异性来更新页面；其特性是深度优先，同层级比较
-</code></pre>
-<h3 id="2-基本实现思路："><a href="#2-基本实现思路：" class="headerlink" title="2.基本实现思路："></a>2.基本实现思路：</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54ebec02e088424ab5bbadfa0f7a2c43~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1738&h=1587&s=265583&e=png&b=fefefe"></p>
-<p>Diff 的入口函数是 reconcileChildFibers：会根据 newChild（即 JSX 对象）类型调用不同的处理函数。</p>
-<p>根据同级的节点数量将 Diﬀ 分为两类：</p>
-<p>（1） 单节点 diff：</p>
-<p>当 newChild 类型为 object、number、string，代表同级只有⼀个节点，执行 reconcileSingleElement。</p>
-<p>比较规则：</p>
-<ul>
-<li>⾸先⽐较 key 是否相同</li>
-<li>key 相同，接下来⽐较 type 是否相同<br>三种可能结果：</li>
-<li>key 和 type 都相同，可以复用</li>
-<li>当 child !&#x3D;&#x3D; null 且 type 不同就跳出 switch，将 fiber 及其兄弟 fiber 标记为删除</li>
-<li>当 child !&#x3D;&#x3D; null 且 key 不同，走 else，将 fiber 标记为删除，前往下一个 sibling fiber</li>
-</ul>
-<p>（2） 多节点 diff：当 newChild 类型为 Array，同级有多个节点，会执行 reconcileChildrenArray。</p>
-<ul>
-<li><p>多节点 diff 比较的类型：</p>
-<ul>
-<li>属性变化</li>
-<li>类型 type 变化</li>
-<li>节点删除</li>
-<li>节点新增</li>
-<li>节点移动</li>
-</ul>
-</li>
-<li><p>多节点 diff 会经历 3 次遍历：</p>
-<p>1）处理节点的更新（包括 props 更新和 type 更新和删除）</p>
-<ul>
-<li>遍历 newChildren，将 newChildren[i]与 oldFiber ⽐较，判断 DOM 节点是否可复⽤；</li>
-<li>如果可复⽤，i++，继续⽐较 newChildren[i]与 oldFiber.sibling，可以复⽤则继续遍历；</li>
-<li>如果不可复⽤，分两种情况：<br>a. key 不同导致不可复⽤，⽴即跳出整个遍历，第⼀轮遍历结束；<br>b. key 相同 type 不同导致不可复⽤，会将 oldFiber 标记为 DELETION，并继续遍历；</li>
-<li>如果 newChildren 遍历完（即 i &#x3D;&#x3D;&#x3D; newChildren.length - 1 ）或者 oldFiber 遍历完（即<br>oldFiber.sibling &#x3D;&#x3D;&#x3D; null），跳出遍历，第⼀轮遍历结束</li>
-</ul>
-<p>2）遍历处理其他的情况（节点新增）</p>
-<ul>
-<li>newChildren 和 oldFiber 同时遍历完：<br>不需要第⼆轮的遍历，直接进⾏ update，diﬀ 结束；</li>
-<li>newChildren 没遍历完，oldFiber 遍历完：<br>已有的 DOM 节点都对⽐结束，这时还有新加⼊的节点，意味着本次更新有新节点插⼊，我们只需要遍历，剩下的 newChildren 为⽣成的 workInProgress ﬁber 依次标记 Placement；</li>
-<li>newChildren 遍历完，oldFiber 没遍历完：<br>本次更新⽐之前的节点数量少，有节点被删除了。所以需要遍历剩下的 oldFiber，依次标记 Deletion；</li>
-<li>newChildren 与 oldFiber 都没遍历完：<br>意味着有节点更新了位（找到 key)。</li>
-</ul>
-<p>3）处理位节点置改变:</p>
-<p>为了快速的找到 key 对应的 oldFiber，我们将所有还未处理的 oldFiber 存⼊以 key 为 key，oldFiber 为 value 的 Map 中。<br>接下来遍历剩余的 newChildren，通过 newChildren[i].key 就能在 existingChildren 中找到 key 相同的 oldFiber。</p>
-</li>
-</ul>
-<h3 id="3-采用什么策略降低复杂度："><a href="#3-采用什么策略降低复杂度：" class="headerlink" title="3.采用什么策略降低复杂度："></a>3.采用什么策略降低复杂度：</h3><p>diff 操作本身也会带来性能损耗，因为 diff 算法中进行 3 次遍历，算法复杂度为 O(n^3)，数据量的情况下，内存开销太大了</p>
-<ul>
-<li>tree （插入，删除）：只对同级比较，跨层级的 dom 不会进行复用；</li>
-<li>component（插入，删除） ：不同类型节点生成的 dom 树不同，此时会直接销毁老节点及子孙节点，并新建节点；</li>
-<li>element （插入、移动[key]、删除）：可以通过 key 来对元素 diff 的过程提供复用的线索。</li>
-</ul>
-<h2 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6932019702159917064?searchId=202312261012193802BC889B58FB294781">diff 算法(妈妈再也不担心我的 diff 面试了)</a></li>
-<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7304182374601474089?searchId=202312261012193802BC889B58FB294781#heading-7">图解 DIFF 算法介绍</a></li>
-<li><a href="https://link.juejin.cn/?target=https://github.com/facebook/react/blob/960ed6ea4341b4189a4f6c4edfa6bfe4c712e097/packages/react-reconciler/src/ReactChildFiber.js%23L835">react 多节点 DIFF 算法逻辑官方 github 源码</a></li>
-</ul>
+        <h2 id="H-指数"><a href="#H-指数" class="headerlink" title="H 指数"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/h-index/description/">H 指数</a></h2><p>H 指数的概念：h 代表“高引用次数” ，一名科研人员的 h 指数 是指他（她）至少发表了 h 篇论文，并且 至少 有 h 篇论文被引用次数大于等于 h 。如果 h 有多种可能的值，h 指数 是其中最大的那个。</p>
+<p>输入：citations &#x3D; [3,0,6,1,5]</p>
+<p>输出：3</p>
+<p>解释：给定数组表示研究者总共有 5 篇论文，每篇论文相应的被引用了 3, 0, 6, 1, 5 次。</p>
+<p>由于研究者有 3 篇论文每篇 至少 被引用了 3 次，其余两篇论文每篇被引用 不多于 3 次，所以她的 h 指数是 3。</p>
+<h3 id="1-根据-H-指数的定义直接解题："><a href="#1-根据-H-指数的定义直接解题：" class="headerlink" title="1. 根据 H 指数的定义直接解题："></a>1. 根据 H 指数的定义直接解题：</h3><p>首先先给数组排序，然后根据定义，如果满足 (citationsSort.length - i ) &lt;&#x3D; citationsSort[i] 该条件，那么 citationsSort.length - i 就是 H 指数，即为所求。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number[]</span>&#125; <span class="variable">citations</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> hIndex = <span class="keyword">function</span> (<span class="params">citations</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> citationsSort = citations.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br><span class="line">  <span class="keyword">const</span> len = citationsSort.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (len - i &lt;= citationsSort[i]) &#123;</span><br><span class="line">      <span class="keyword">return</span> len - i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度：O(nlog⁡n)</strong></p>
+<p>其中 n 为数组 citations 的长度。即为排序的时间复杂度。</p>
+<p><strong>空间复杂度：O(nlog⁡n)</strong></p>
+<p>其中 n 为数组 citations 的长度。即为排序的时间复杂度。</p>
+<h3 id="2-二分查找法："><a href="#2-二分查找法：" class="headerlink" title="2. 二分查找法："></a>2. 二分查找法：</h3><p>我们需要找到一个值 h，使得它满足 有 h 篇论文的引用次数至少为 h 。</p>
+<p>其实此题可以转化为 求 h 的最大值，这样子就类似于这个题<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/">二分查找</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hIndex = <span class="keyword">function</span> (<span class="params">citations</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = citations.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">let</span> mid = <span class="title class_">Math</span>.<span class="title function_">floor</span>((left + right + <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">let</span> h = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> citations) &#123;</span><br><span class="line">      <span class="keyword">if</span> (v &gt;= mid) &#123;</span><br><span class="line">        h++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (h &gt;= mid) &#123;</span><br><span class="line">      left = mid;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> left;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度：O(nlogn)</strong></p>
+<p>其中 n 为数组 citations 的长度。需要进行 logn 次二分搜索，每次二分搜索需要遍历数组 citations 一次。</p>
+<p><strong>空间复杂度：O(1)</strong></p>
+<p>只需要常数个变量来进行二分搜索。</p>
 
     </div>
 
@@ -318,7 +283,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/kelly240112.github.io/tags/Diff/" rel="tag"># Diff</a>
+              <a href="/kelly240112.github.io/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
+              <a href="/kelly240112.github.io/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           </div>
 
         
@@ -326,10 +292,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/kelly240112.github.io/articles/2024/01/13/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/" rel="next" title="二叉树遍历">
-      二叉树遍历 <i class="fa fa-chevron-right"></i>
+    <a href="/kelly240112.github.io/articles/2024/01/13/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/" rel="prev" title="二叉树遍历">
+      <i class="fa fa-chevron-left"></i> 二叉树遍历
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/kelly240112.github.io/articles/2024/01/20/%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%95%BF%E5%BA%A6/" rel="next" title="最后一个单词的长度">
+      最后一个单词的长度 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -389,7 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-Diff"><span class="nav-number">1.</span> <span class="nav-text">vue Diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Diff"><span class="nav-number">2.</span> <span class="nav-text">React Diff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">1.是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">2.基本实现思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%87%87%E7%94%A8%E4%BB%80%E4%B9%88%E7%AD%96%E7%95%A5%E9%99%8D%E4%BD%8E%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">3.采用什么策略降低复杂度：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">参考文档：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#H-%E6%8C%87%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">H 指数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%B9%E6%8D%AE-H-%E6%8C%87%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E7%9B%B4%E6%8E%A5%E8%A7%A3%E9%A2%98%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">1. 根据 H 指数的定义直接解题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%B3%95%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">2. 二分查找法：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
