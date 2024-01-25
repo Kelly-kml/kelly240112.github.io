@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a>
+    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -185,6 +185,160 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/22/%E6%AF%8F%E6%97%A5%E4%B8%80%E5%88%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/kelly240112.github.io/images/avatar.jpg">
+      <meta itemprop="name" content="kelly">
+      <meta itemprop="description" content="野孩子玩耍的殿堂">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宫崎骏的捣蛋野孩子">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/kelly240112.github.io/articles/2024/01/22/%E6%AF%8F%E6%97%A5%E4%B8%80%E5%88%B7/" class="post-title-link" itemprop="url">双指针之典例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-22 23:23:08" itemprop="dateCreated datePublished" datetime="2024-01-22T23:23:08+08:00">2024-01-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-25 23:34:26" itemprop="dateModified" datetime="2024-01-25T23:34:26+08:00">2024-01-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/kelly240112.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="验证回文串"><a href="#验证回文串" class="headerlink" title="验证回文串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-palindrome/description">验证回文串</a></h2><h3 id="1-双指针法："><a href="#1-双指针法：" class="headerlink" title="1. 双指针法："></a>1. 双指针法：</h3><p>解题思路：</p>
+<ol>
+<li><p>先使用正则处理字符串 s，只保留数字和字母，处理后得到的字符记录在字符串 sStrings 中；</p>
+</li>
+<li><p>将 sStrings 全部转为小写；</p>
+</li>
+<li><p>通过双指针，分别指向左右两侧的字符，进行比对，返回 true 或 false。</p>
+<p>**</p>
+<p>​</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isPalindrome = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="comment">// 先正则只保留字母数字，toLowerCase转为小写</span></span><br><span class="line">  <span class="keyword">let</span> sStrings = s.<span class="title function_">replace</span>(<span class="regexp">/[^0-9a-zA-Z]/g</span>, <span class="string">&#x27;&#x27;</span>).<span class="title function_">toLowerCase</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 双指针验证</span></span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = sStrings.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (sStrings.<span class="title function_">charAt</span>(left) !== sStrings.<span class="title function_">charAt</span>(right)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    left++;</span><br><span class="line">    right--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>时间复杂度：O(∣s∣)，其中 ∣s∣ 是字符串 s 的长度。</p>
+</li>
+<li><p>空间复杂度：O(∣s∣)，最坏情况下，新字符串 sStrings 和 s 长度一样。</p>
+<p>​</p>
+</li>
+</ul>
+<h3 id="2-直接利用数组的方法解："><a href="#2-直接利用数组的方法解：" class="headerlink" title="2. 直接利用数组的方法解："></a>2. 直接利用数组的方法解：</h3><p>解题思路：</p>
+<ol>
+<li>先使用正则处理字符串 s，只保留数字和字母，处理后得到的字符记录在字符串 sStrings 中；</li>
+<li>将 sStrings 全部转为小写；</li>
+<li>直接利用数组的 reverse() 方法，翻转的字符串还是一样的，返回 true，否则返回 false。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isPalindrome = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="comment">// 先正则只保留字母数字，toLowerCase转为小写</span></span><br><span class="line">  <span class="keyword">let</span> sStrings = s.<span class="title function_">replace</span>(<span class="regexp">/[^0-9a-zA-Z]/g</span>, <span class="string">&#x27;&#x27;</span>).<span class="title function_">toLowerCase</span>();</span><br><span class="line">  <span class="comment">// 直接利用 reverse()</span></span><br><span class="line">  <span class="keyword">if</span> (sStrings == [...sStrings].<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(∣s∣)，其中 ∣s∣ 是字符串 s 的长度。</li>
+<li>空间复杂度：O(∣s∣)，最坏情况下，新字符串 sStrings 和 s 长度一样。</li>
+</ul>
+<hr>
+<h2 id="判断子序列"><a href="#判断子序列" class="headerlink" title="判断子序列"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/description">判断子序列</a></h2><h3 id="1-双指针法：-1"><a href="#1-双指针法：-1" class="headerlink" title="1. 双指针法："></a>1. 双指针法：</h3><p>解题思路：</p>
+<p>可以直接设置两个指针 i, j，然后不断同时移动两个指针，进行比对。当比对循环结束时，t 的对应指针的 i 值等于 t 字符串的长度，那么说明 t 就是 s 的子序列。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isSubsequence = <span class="keyword">function</span> (<span class="params">s, t</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> n = s.<span class="property">length</span>,</span><br><span class="line">    m = t.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">    j = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; m) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s.<span class="title function_">charAt</span>(i) === t.<span class="title function_">charAt</span>(j)) &#123;</span><br><span class="line">      i++;</span><br><span class="line">    &#125;</span><br><span class="line">    j++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> i == n;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>时间复杂度：O(n+m)，其中 nnn 为 s 的长度，m 为 ttt 的长度。每次无论是匹配成功还是失败，都有至少一个指针发生右移，两指针能够位移的总距离为 n+m。</p>
+</li>
+<li><p>空间复杂度：O(1)</p>
+</li>
+</ul>
+<hr>
+<h2 id="两数之和-输入有序数组"><a href="#两数之和-输入有序数组" class="headerlink" title="两数之和|| - 输入有序数组"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description">两数之和|| - 输入有序数组</a></h2><h3 id="1-二分查找法："><a href="#1-二分查找法：" class="headerlink" title="1. 二分查找法："></a>1. 二分查找法：</h3><p>基于本题是有序数组，因此我们很自然可以考虑 <code>二分查找</code> 法来解决。</p>
+<p>基本思路为：</p>
+<p>我们先用 for 循环来设置一个变量 i ，用来记录数组中的其中一个值，然后利用二分查找的方式来寻找合适下标为 mid 的值，使得 numbers[mid] &#x3D; target - numbers[i] ，此时返回 [i, mid] 就是我们所求的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twoSum = <span class="keyword">function</span> (<span class="params">numbers, target</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; numbers.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> left = i + <span class="number">1</span>,</span><br><span class="line">      right = numbers.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">      <span class="keyword">let</span> mid = <span class="title class_">Math</span>.<span class="title function_">floor</span>((left + right) / <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">if</span> (numbers[mid] + numbers[i] === target) &#123;</span><br><span class="line">        <span class="keyword">return</span> [i + <span class="number">1</span>, mid + <span class="number">1</span>];</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] + numbers[i] &gt; target) &#123;</span><br><span class="line">        right = mid - <span class="number">1</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        left = mid + <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> [-<span class="number">1</span>, -<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>注意：这道题的下标是为 1 开始计数的，因此 [i, mid] 都需要加上 1。</p>
+<ul>
+<li>时间复杂度：O(nlogn)。需要遍历数组一次确定第一个数，时间复杂度是 O(n)，寻找第二个数使用二分查找，时间复杂度为 O(logn)，因此总的时间复杂度为 O(nlogn)。</li>
+<li>空间复杂度：O(1)。</li>
+</ul>
+<h3 id="2-双指针法："><a href="#2-双指针法：" class="headerlink" title="2. 双指针法："></a>2. 双指针法：</h3><p>使用双指针法，左右两个指针分别指向两个目标元素，通过移动指针，找到两个目标元素之和为 target，就返回对应的下标组合。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twoSum = <span class="keyword">function</span> (<span class="params">numbers, target</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = numbers.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (numbers[left] + numbers[right] === target) &#123;</span><br><span class="line">      <span class="keyword">return</span> [left + <span class="number">1</span>, right + <span class="number">1</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (numbers[left] + numbers[right] &lt; target) &#123;</span><br><span class="line">      left++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> [-<span class="number">1</span>, -<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)。两个指针总移动的次数最多为 n 次。</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<hr>
+<h2 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/description">三数之和</a></h2><h3 id="排序-双指针"><a href="#排序-双指针" class="headerlink" title="排序 + 双指针"></a>排序 + 双指针</h3><p>求三元组，三数之和为 0，且三数不能重复。</p>
+<p>我们可以利用排序配合双指针的方式来解决。</p>
+<p>（1）首先，我们需要做一个特殊判断，三元组很明显就是三个数组成的，因此，我们可以先通过判断数组的长度，如果长度 &lt; 3，那么直接返回 [] 即可，节省算法跑空时间；</p>
+<p>（2）我们可以利用一个 for 循环跟踪 nums[i]，利用双指针 left 和 right 来跟踪 nums[left] 和 nums[right]，因此，我们需要满足：nums[i] + nums[left] + nums[right] &#x3D; 0。</p>
+<p>（3）这道题最大的关键就是需要<strong>保证三元组的三数不重复，而且三元组的元素是无序的，我们需要排除重复解</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> threeSum = <span class="keyword">function</span> (<span class="params">nums</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (nums === <span class="literal">null</span> || nums.<span class="property">length</span> &lt; <span class="number">3</span>) <span class="keyword">return</span> [];</span><br><span class="line">  <span class="keyword">let</span> numsArr = nums.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br><span class="line">  <span class="keyword">const</span> ansArr = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; numsArr.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) <span class="keyword">return</span> ansArr;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] === nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> left = i + <span class="number">1</span>,</span><br><span class="line">      right = numsArr.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">      <span class="keyword">if</span> (numsArr[i] + numsArr[left] + numsArr[right] === <span class="number">0</span>) &#123;</span><br><span class="line">        ansArr.<span class="title function_">push</span>([numsArr[i], numsArr[left], numsArr[right]]);</span><br><span class="line">        <span class="comment">// 判断左界和右界是否和下一位重复，去除重复解。并且同时将left和right移到下一位，寻找新解。</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] === nums[left + <span class="number">1</span>]) &#123;</span><br><span class="line">          left++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] === nums[right - <span class="number">1</span>]) &#123;</span><br><span class="line">          right--;</span><br><span class="line">        &#125;</span><br><span class="line">        left++;</span><br><span class="line">        right--;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (numsArr[i] + numsArr[left] + numsArr[right] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        left++;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        right--;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ansArr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n^2)。</li>
+<li>空间复杂度：O(n)。使用了一个额外的数组存储了 nums 的副本并进行排序。</li>
+</ul>
+<hr>
+<h2 id="盛最多水的容器"><a href="#盛最多水的容器" class="headerlink" title="盛最多水的容器"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/container-with-most-water/description">盛最多水的容器</a></h2><p>可以使用双指针的方法解决这个问题，两个指针分别指向容器的左右两端，通过移动两端的边界，使得容器的容水量最大。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> maxArea = <span class="keyword">function</span> (<span class="params">height</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = height.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">let</span> area = <span class="title class_">Math</span>.<span class="title function_">min</span>(height[left], height[right]) * (right - left);</span><br><span class="line">    ans = <span class="title class_">Math</span>.<span class="title function_">max</span>(ans, area);</span><br><span class="line">    <span class="keyword">if</span> (height[left] &lt; height[right]) &#123;</span><br><span class="line">      left++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)。双指针最多遍历完整个数组一次。</li>
+<li>空间复杂度：O(1)。只需要额外的常数级别来存储指针的空间。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -759,7 +913,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/kelly240112.github.io/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -772,7 +926,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/kelly240112.github.io/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
