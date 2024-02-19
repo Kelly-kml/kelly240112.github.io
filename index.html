@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
+    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -185,6 +185,134 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/02/13/%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/kelly240112.github.io/images/avatar.jpg">
+      <meta itemprop="name" content="kelly">
+      <meta itemprop="description" content="野孩子玩耍的殿堂">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宫崎骏的捣蛋野孩子">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/kelly240112.github.io/articles/2024/02/13/%E6%A0%88/" class="post-title-link" itemprop="url">栈之经典案例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-02-13 19:49:34" itemprop="dateCreated datePublished" datetime="2024-02-13T19:49:34+08:00">2024-02-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-15 22:03:17" itemprop="dateModified" datetime="2024-02-15T22:03:17+08:00">2024-02-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/kelly240112.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="有效的括号"><a href="#有效的括号" class="headerlink" title="有效的括号"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/description">有效的括号</a></h2><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><ol>
+<li>判断有效括号可以先做一个特殊判断，因为括号都是成双成对的，因此，我们可以先判断括号字符串的长度，如果是基数，那么一定不是有效括号；</li>
+<li>为了快速判断括号的类型，我可以先建立一个哈希表，哈希表的键为右括号，值为相同类型的左括号。</li>
+<li>遍历给定的字符串，当我们遇到一个左括号，我们会希望在后续的遍历中遇到一个相同类型的右括号将其闭合。后面遇到的左括号需要先闭合，因此我们可以利用栈（先进后出），将这个左括号放入栈顶。</li>
+<li>当我们遇到右括号，这时可以取出栈顶的左括号并判断是否是相同类型的，如果没有符合的左括号，说明是无效括号，返回 false。</li>
+<li>在遍历结束后，如果栈中没有左括号了，说明我们将字符串 s 中的所有括号左括号都闭合了，返回 true，否则就返回 false。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isValid = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> n = s.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">if</span> (n % <span class="number">2</span> === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> pairs = <span class="keyword">new</span> <span class="title class_">Map</span>([</span><br><span class="line">    [<span class="string">&#x27;)&#x27;</span>, <span class="string">&#x27;(&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;]&#x27;</span>, <span class="string">&#x27;[&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;&#125;&#x27;</span>, <span class="string">&#x27;&#123;&#x27;</span>],</span><br><span class="line">  ]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> stk = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> ch <span class="keyword">of</span> s) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pairs.<span class="title function_">has</span>(ch)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!stk.<span class="property">length</span> || stk[stk.<span class="property">length</span> - <span class="number">1</span>] !== pairs.<span class="title function_">get</span>(ch)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(stk, <span class="string">&#x27;pppp&#x27;</span>);</span><br><span class="line">      stk.<span class="title function_">pop</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(stk, <span class="string">&#x27;0000&#x27;</span>);</span><br><span class="line">      stk.<span class="title function_">push</span>(ch);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> !stk.<span class="property">length</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度： O(n)</li>
+<li>空间复杂度： O(n)</li>
+</ul>
+<h2 id="最小栈"><a href="#最小栈" class="headerlink" title="最小栈"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-stack/description">最小栈</a></h2><h3 id="解题思路：-1"><a href="#解题思路：-1" class="headerlink" title="解题思路："></a>解题思路：</h3><p><strong>栈</strong>的特性是：只能对栈顶元素进行操作，因此我们需要创建两个栈：一个主栈（x_stack），一个辅助栈（min_stack），在每次查找时也顺便把目前栈中最小的元素记录，存放在辅助栈中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">MinStack</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">x_stack</span> = [];</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">min_stack</span> = [<span class="title class_">Infinity</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; <span class="variable">val</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">void</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title class_">MinStack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">push</span> = <span class="keyword">function</span> (<span class="params">val</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">x_stack</span>.<span class="title function_">push</span>(val);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">min_stack</span>.<span class="title function_">push</span>(<span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="variable language_">this</span>.<span class="property">min_stack</span>[<span class="variable language_">this</span>.<span class="property">min_stack</span>.<span class="property">length</span> - <span class="number">1</span>], val));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">void</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title class_">MinStack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">pop</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">x_stack</span>.<span class="title function_">pop</span>();</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">min_stack</span>.<span class="title function_">pop</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title class_">MinStack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">top</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">x_stack</span>[<span class="variable language_">this</span>.<span class="property">x_stack</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title class_">MinStack</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getMin</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">min_stack</span>[<span class="variable language_">this</span>.<span class="property">min_stack</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MinStack object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * var obj = new MinStack()</span></span><br><span class="line"><span class="comment"> * obj.push(val)</span></span><br><span class="line"><span class="comment"> * obj.pop()</span></span><br><span class="line"><span class="comment"> * var param_3 = obj.top()</span></span><br><span class="line"><span class="comment"> * var param_4 = obj.getMin()</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度： O(1)</li>
+<li>空间复杂度： O(n)</li>
+</ul>
+<h2 id="简化路径"><a href="#简化路径" class="headerlink" title="简化路径"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/simplify-path/description">简化路径</a></h2><p>此题要求简化路径的格式要遵循的原则：</p>
+<blockquote>
+<p>始终以斜杠 ‘&#x2F;‘ 开头。<br>两个目录名之间必须只有一个斜杠 ‘&#x2F;‘ 。<br>最后一个目录名（如果存在）不能 以 ‘&#x2F;‘ 结尾。<br>此外，路径仅包含从根目录到目标文件或目录的路径上的目录（即，不含 ‘.’ 或 ‘..’）。<br>返回简化后得到的 规范路径 。</p>
+</blockquote>
+<h3 id="解题思路：-2"><a href="#解题思路：-2" class="headerlink" title="解题思路："></a>解题思路：</h3><ol>
+<li>利用 split 方法根据 “&#x2F;“ 将指定的字符串分割，转为数组字符串，该字符串可能含有”..”， “.”，正常的字符串；</li>
+<li>如果遇到的字符串是”..”，那么我们需要先看看 stack 是否为空（pop 弹出栈），如果不空就先清空，因为”..”之前的字符都不需要计入规范路径中；</li>
+<li>如果遇到的字符串不为”.”，那么我们需要将 name 压入栈中（push）；</li>
+<li>最后遍历结束后，返回”&#x2F;“ + stack.join(“&#x2F;“)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> simplifyPath = <span class="keyword">function</span> (<span class="params">path</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> names = path.<span class="title function_">split</span>(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(names);</span><br><span class="line">  <span class="keyword">const</span> stack = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> name <span class="keyword">of</span> names) &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">&#x27;..&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (stack.<span class="property">length</span>) &#123;</span><br><span class="line">        stack.<span class="title function_">pop</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (name.<span class="property">length</span> &amp;&amp; name !== <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">      stack.<span class="title function_">push</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span> + stack.<span class="title function_">join</span>(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度： O(n)</li>
+<li>空间复杂度： O(n)</li>
+</ul>
+<h2 id="逆波兰表达式求值"><a href="#逆波兰表达式求值" class="headerlink" title="逆波兰表达式求值"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/description">逆波兰表达式求值</a></h2><p>逆波兰表达式由波兰的逻辑学家路卡西维兹提出。<strong>逆波兰表达式的特点：</strong>没有括号，运算符总是放在和它相关的操作数之后。因此，逆波兰表达式也称为<strong>后缀表达式</strong>。</p>
+<p>逆波兰表达式严格遵循「从左到右」的运算。刚好可以使用一个栈存储操作数，从左到右遍历逆波兰表达式，进行操作：</p>
+<ul>
+<li>如果遇到操作数，则将其入栈；</li>
+<li>如果遇到运算符，则将两个操作数出栈，其中先出栈的是右操作数，后出栈的是左操作数，使用运算符对两个操作数进行运算，将运算得到的新操作数入栈。</li>
+</ul>
+<p>整个逆波兰表达式遍历结束后，栈内就只有一个元素，该元素就是逆波兰表达式的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> evalRPN = <span class="keyword">function</span> (<span class="params">tokens</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> stack = [];</span><br><span class="line">  <span class="keyword">const</span> n = tokens.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> token = tokens[i];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isNumber</span>(token)) &#123;</span><br><span class="line">      stack.<span class="title function_">push</span>(<span class="built_in">parseInt</span>(token));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> num2 = stack.<span class="title function_">pop</span>();</span><br><span class="line">      <span class="keyword">const</span> num1 = stack.<span class="title function_">pop</span>();</span><br><span class="line">      <span class="keyword">if</span> (token === <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">        stack.<span class="title function_">push</span>(num1 + num2);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (token === <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">        stack.<span class="title function_">push</span>(num1 - num2);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (token === <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">        stack.<span class="title function_">push</span>(num1 * num2);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (token === <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">        stack.<span class="title function_">push</span>(</span><br><span class="line">          num1 / num2 &gt; <span class="number">0</span> ? <span class="title class_">Math</span>.<span class="title function_">floor</span>(num1 / num2) : <span class="title class_">Math</span>.<span class="title function_">ceil</span>(num1 / num2)</span><br><span class="line">        );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> stack.<span class="title function_">pop</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">isNumber</span> = (<span class="params">token</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> !(<span class="string">&#x27;+&#x27;</span> === token || <span class="string">&#x27;-&#x27;</span> === token || <span class="string">&#x27;*&#x27;</span> === token || <span class="string">&#x27;/&#x27;</span> === token);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)，其中 n 是数组 tokens 的长度。需要遍历数组 tokens 一次，计算逆波兰表达式的值。</li>
+<li>空间复杂度：O(n)，其中 n 是数组 tokens 的长度，使用栈存储计算过程中的数，栈内元素个数不会超过逆波兰表达式的长度。</li>
+</ul>
+<h2 id="基本计算器"><a href="#基本计算器" class="headerlink" title="基本计算器"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/basic-calculator/description">基本计算器</a></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> calculate = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ops = [<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">let</span> sign = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> ret = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> n = s.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (i &lt; n) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s[i] === <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s[i] === <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">      sign = ops[ops.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s[i] === <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">      sign = -ops[ops.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s[i] === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">      ops.<span class="title function_">push</span>(sign);</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s[i] === <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">      ops.<span class="title function_">pop</span>();</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> num = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (i &lt; n &amp;&amp; !<span class="built_in">isNaN</span>(<span class="title class_">Number</span>(s[i])) &amp;&amp; s[i] !== <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">        num = num * <span class="number">10</span> + s[i].<span class="title function_">charCodeAt</span>() - <span class="string">&#x27;0&#x27;</span>.<span class="title function_">charCodeAt</span>();</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      ret += sign * num;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度： O(n)</li>
+<li>空间复杂度： O(n)</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -516,7 +644,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-08 22:32:17" itemprop="dateModified" datetime="2024-02-08T22:32:17+08:00">2024-02-08</time>
+                <time title="修改时间：2024-02-13 19:50:29" itemprop="dateModified" datetime="2024-02-13T19:50:29+08:00">2024-02-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1422,7 +1550,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/kelly240112.github.io/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1435,7 +1563,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/kelly240112.github.io/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
