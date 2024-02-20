@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
+    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -185,6 +185,145 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/02/20/%E7%AA%97%E5%8F%A3%E6%BB%91%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/kelly240112.github.io/images/avatar.jpg">
+      <meta itemprop="name" content="kelly">
+      <meta itemprop="description" content="野孩子玩耍的殿堂">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宫崎骏的捣蛋野孩子">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/kelly240112.github.io/articles/2024/02/20/%E7%AA%97%E5%8F%A3%E6%BB%91%E5%8A%A8/" class="post-title-link" itemprop="url">窗口滑动之经典案例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-02-20 17:01:33 / 修改时间：22:08:33" itemprop="dateCreated datePublished" datetime="2024-02-20T17:01:33+08:00">2024-02-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/kelly240112.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="长度最小的子数组"><a href="#长度最小的子数组" class="headerlink" title="长度最小的子数组"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/description">长度最小的子数组</a></h1><p>题目要求是要满足连续子数组的<code>sum</code> 值大于等于 <code>target</code> 值，然后返回子数组的最小长度。</p>
+<h2 id="法一：二分查找"><a href="#法一：二分查找" class="headerlink" title="法一：二分查找"></a>法一：二分查找</h2><p>解题思路：</p>
+<ol>
+<li>计算 <code>nums</code> 的前缀和 <code>sums</code>；</li>
+<li>寻找：二分查找的结果大于或等于 <code>target + sums[i]</code>，记录下来，最后返回长度最小的结果数组的长度。<br>特别注意：二分查找的条件</li>
+</ol>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> minSubArrayLen = <span class="keyword">function</span> (<span class="params">target, nums</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> n = nums.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> ans = <span class="title class_">Infinity</span>;</span><br><span class="line">  <span class="keyword">const</span> sums = [<span class="number">0</span>]; <span class="comment">// 前缀和</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    sums[i] = sums[i - <span class="number">1</span>] + nums[i - <span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> endValue = sums[i - <span class="number">1</span>] + target;</span><br><span class="line">    <span class="keyword">let</span> bound = <span class="title function_">binarySearch</span>(sums, i, n, endValue);</span><br><span class="line">    <span class="keyword">if</span> (bound !== -<span class="number">1</span>) &#123;</span><br><span class="line">      ans = <span class="title class_">Math</span>.<span class="title function_">min</span>(ans, bound - (i - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans === <span class="title class_">Infinity</span> ? <span class="number">0</span> : ans;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二分查找</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">binarySearch</span>(<span class="params">a, l, r, target</span>) &#123;</span><br><span class="line">  <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">    <span class="keyword">let</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &lt; target) &#123;</span><br><span class="line">      l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      r = mid;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a[l] &gt;= target ? l : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h2 id="法二：使用队列相加（实际上也类似于一个滑动窗口）"><a href="#法二：使用队列相加（实际上也类似于一个滑动窗口）" class="headerlink" title="法二：使用队列相加（实际上也类似于一个滑动窗口）"></a>法二：使用队列相加（实际上也类似于一个滑动窗口）</h2><p>解题思路：</p>
+<ol>
+<li>将数组中的元素不停的入队，入队就顺便累加到 <code>sum</code> 中，直到 <code>sum</code>的值大于或等于 <code>target</code> 结束，记录下此时队列的长度；</li>
+<li>然后不停的出队，<code>sum</code> 累减出队的元素，重复步骤 1；</li>
+<li>不断重复这个队列的操作，直到数组遍历结束时，即没有新的元素可以添加到队列中；</li>
+<li>最后返回记录下来的子数组的最小长度。</li>
+</ol>
+<p>接下来以数组[2,3,1,2,4,3]为例来画图，使得思路更清晰一些：</p>
+<p><img src="https://pic.leetcode-cn.com/10ca012c2f0170afcac5e5996add20c32c36a82f4bb4a6187897bb948ace5fe2-image.png"></p>
+<p><img src="https://pic.leetcode-cn.com/2da8cf86a2a3df3c95ed7d95add574dca2d8bae8420addd0fa6b8c55fa3db081-image.png"></p>
+<p><img src="https://pic.leetcode-cn.com/ca74b1a2ad0eb5a4ebf8647a332161b140c8ebdd71cd5d19bef16e9bf0a43c95-image.png"></p>
+<p><img src="https://pic.leetcode-cn.com/72f39b5cd7eb5f866e24d0a31eb3eac7d57cf3ad202ad40d30f103833c1f5a69-image.png"></p>
+<p>不过，这里我们不使用队列来书写代码，而是采用双指针的方式来书写代码，两端指针包围的元素就是队列中的元素。</p>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> minSubArrayLen = <span class="keyword">function</span> (<span class="params">target, nums</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> n = nums.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> start = <span class="number">0</span>,</span><br><span class="line">    end = <span class="number">0</span>,</span><br><span class="line">    sum = <span class="number">0</span>,</span><br><span class="line">    min = <span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span>;</span><br><span class="line">  <span class="keyword">while</span> (end &lt; n) &#123;</span><br><span class="line">    sum += nums[end];</span><br><span class="line">    <span class="comment">// 不断移动左指针，直到不能再缩小为止</span></span><br><span class="line">    <span class="keyword">while</span> (sum &gt;= target) &#123;</span><br><span class="line">      min = <span class="title class_">Math</span>.<span class="title function_">min</span>(min, end - start + <span class="number">1</span>);</span><br><span class="line">      sum -= nums[start++];</span><br><span class="line">    &#125;</span><br><span class="line">    end++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> min === <span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span> ? <span class="number">0</span> : min;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度: O(n)</li>
+<li>空间复杂度: O(1)</li>
+</ul>
+<h1 id="无重复字符的最长子串"><a href="#无重复字符的最长子串" class="headerlink" title="无重复字符的最长子串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/description">无重复字符的最长子串</a></h1><h2 id="法一：维护数组："><a href="#法一：维护数组：" class="headerlink" title="法一：维护数组："></a>法一：维护数组：</h2><p>解题思路：使用一个数组来维护滑动窗口</p>
+<p>遍历字符串，判断字符串是否在滑动窗口数组中：</p>
+<ul>
+<li>不在则<code>push</code>进数组</li>
+<li>存在则删除滑动窗口数组里相同字符以及相同字符当前的字符，然后将当前字符<code>push</code>进数组</li>
+<li>然后将<code>maxLen</code>更新为当前最长子串的长度<br>遍历结束后，返回<code>maxLen</code></li>
+</ul>
+<p>接下来，我们借助画图来进一步理解：</p>
+<p><img src="https://pic.leetcode-cn.com/202ea5bd4d4ba4a21afafdf52a9ea2556ba6265c1576840f09ace50aafab095c.png"></p>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> arr = [],</span><br><span class="line">    maxLen = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> index = arr.<span class="title function_">indexOf</span>(s[i]);</span><br><span class="line">    <span class="keyword">if</span> (index !== -<span class="number">1</span>) &#123;</span><br><span class="line">      arr.<span class="title function_">splice</span>(<span class="number">0</span>, index + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    arr.<span class="title function_">push</span>(s.<span class="title function_">charAt</span>(i));</span><br><span class="line">    maxLen = <span class="title class_">Math</span>.<span class="title function_">max</span>(arr.<span class="property">length</span>, maxLen);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n^2)，其中 arr.indexOf()时间复杂度为 O(n)，arr.splice(0,index+1)的时间复杂度为 O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h2 id="法二：维护下标："><a href="#法二：维护下标：" class="headerlink" title="法二：维护下标："></a>法二：维护下标：</h2><p>解题思路：使用下标来维护滑动窗口</p>
+<p>与法一思路基本一致。</p>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> index = <span class="number">0</span>,</span><br><span class="line">    maxLen = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, j = <span class="number">0</span>; j &lt; s.<span class="property">length</span>; j++) &#123;</span><br><span class="line">    index = s.<span class="title function_">substring</span>(i, j).<span class="title function_">indexOf</span>(s[j]);</span><br><span class="line">    <span class="keyword">if</span> (index !== -<span class="number">1</span>) &#123;</span><br><span class="line">      i = i + index + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    maxLen = <span class="title class_">Math</span>.<span class="title function_">max</span>(maxLen, j - i + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h2 id="法三：哈希表，优化-Map"><a href="#法三：哈希表，优化-Map" class="headerlink" title="法三：哈希表，优化 Map"></a>法三：哈希表，优化 Map</h2><p>解题思路：</p>
+<ol>
+<li>建立一个哈希表 <code>map</code>， <code>key</code> 为字符串， <code>value</code> 为下标，设置一个记录最大长度的 <code>maxLen</code>；</li>
+<li>使用<code>l</code> 来标记无重复子串开始下标，<code>r</code> 为当前遍历字符的下标；</li>
+<li>遍历整个字符串数组，如果当前字符存在于哈希表中，则更新无重复子串开始下标 <code>i</code> 为相同字符的下一位置，此时从<code>l</code> 到 <code>r</code>为最新的无重复子串，更新 <code>maxLen</code>，将当前字符与下标放入<code>map</code> 中；</li>
+<li>最后返回最长子串的长度 <code>maxLen</code>。</li>
+</ol>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> maxLen = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> l = <span class="number">0</span>, r = <span class="number">0</span>; r &lt; s.<span class="property">length</span>; r++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (map.<span class="title function_">has</span>(s[r])) &#123;</span><br><span class="line">      l = <span class="title class_">Math</span>.<span class="title function_">max</span>(map.<span class="title function_">get</span>(s[r]) + <span class="number">1</span>, l);</span><br><span class="line">    &#125;</span><br><span class="line">    maxLen = <span class="title class_">Math</span>.<span class="title function_">max</span>(maxLen, r - l + <span class="number">1</span>);</span><br><span class="line">    map.<span class="title function_">set</span>(s[r], r);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1550,7 +1689,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/kelly240112.github.io/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1563,7 +1702,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/kelly240112.github.io/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
