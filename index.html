@@ -487,7 +487,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-26 22:54:34" itemprop="dateModified" datetime="2024-02-26T22:54:34+08:00">2024-02-26</time>
+                <time title="修改时间：2024-02-27 11:55:10" itemprop="dateModified" datetime="2024-02-27T11:55:10+08:00">2024-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -724,10 +724,98 @@
 <p>2）Seal 阶段： 利用 <code>FlagDependencyUsagePlugin</code> 插件，遍历 ModuleGraph 标记模块导出变量，然后收集模块的导出值的使用情况，并记录到 <code>exportInfo._usedInRuntime</code> 集合中</p>
 <p>3）生成产物阶段：在 <code>HarmonyExportXXXDependency.Template.apply</code> 方法中根据导出值的使用情况生成不同的导出语句，若变量没有被其它模块使用过则删除对应的导出语句</p>
 <p>4）删除阶段：使用 DCE 工具删除 Dead Code，实现完整的树摇效果</p>
-<h2 id="9-手写一个-plugin"><a href="#9-手写一个-plugin" class="headerlink" title="9. 手写一个 plugin:"></a>9. 手写一个 plugin:</h2><h3 id="1-从-html-webpack-plugin-源码中了解一个-plugin-的基本结构："><a href="#1-从-html-webpack-plugin-源码中了解一个-plugin-的基本结构：" class="headerlink" title="1. 从 html-webpack-plugin 源码中了解一个 plugin 的基本结构："></a>1. 从 html-webpack-plugin 源码中了解一个 plugin 的基本结构：</h3><p><img src="https://s2.loli.net/2024/02/01/Ecjmr4ANixML6wK.png" alt="a4fd0df4f28ef2849cd232f511013fb.png"></p>
+<h2 id="9-Plugin"><a href="#9-Plugin" class="headerlink" title="9.Plugin"></a>9.Plugin</h2><h3 id="9-1-常见的-Plugin："><a href="#9-1-常见的-Plugin：" class="headerlink" title="9.1. 常见的 Plugin："></a>9.1. 常见的 Plugin：</h3><table>
+<thead>
+<tr>
+<th>plugin 名称</th>
+<th>功能特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AggressiveSplittingPlugin</td>
+<td>将原来的 chunk 分为更小的 chunk</td>
+</tr>
+<tr>
+<td>BabelMinifyWebpackPlugin</td>
+<td>使用 babel-minify 进行压缩</td>
+</tr>
+<tr>
+<td>BannerPlugin</td>
+<td>在每个生成的 chunk 顶部添加 banner</td>
+</tr>
+<tr>
+<td>CommonsChunkPlugin</td>
+<td>提取 chunks 之间共享的通用模块</td>
+</tr>
+<tr>
+<td>CompressionWebpackPlugin</td>
+<td>预先准备的资源压缩版本，使用 Content-EnCoding 提供访问的服务</td>
+</tr>
+<tr>
+<td>CleanWebpackPlugin</td>
+<td>删除（清理）构建目录</td>
+</tr>
+<tr>
+<td>ContextReplacementPlugin</td>
+<td>重写 require 表达式的推断上下文</td>
+</tr>
+<tr>
+<td>CopyWebpackPlugin</td>
+<td>将单个文件或者整个目录复制到构建目录</td>
+</tr>
+<tr>
+<td>DefinePlugin</td>
+<td>允许在编译时（compiler time）配置的全局常量</td>
+</tr>
+<tr>
+<td>DLLPlugin</td>
+<td>为了极大减少构建时间，进行分离打包</td>
+</tr>
+<tr>
+<td>EnvironmentPlugin</td>
+<td>DefinePlugin 中 process.env 键的简写方式</td>
+</tr>
+<tr>
+<td>ExtractTextWebpackPlugin</td>
+<td>从 bundle 中提取文本（CSS）到单独的文件中</td>
+</tr>
+<tr>
+<td>HotModuleReplacementPlugin</td>
+<td>启动模块热替换（HMR）</td>
+</tr>
+<tr>
+<td>HtmlWebpackPlugin</td>
+<td>简单创建 HTML 文件，用于服务器访问</td>
+</tr>
+<tr>
+<td>IgnorePlugin</td>
+<td>从 bundle 中排除某些板块</td>
+</tr>
+<tr>
+<td>LimitChunkCountPlugin</td>
+<td>设置 chunk 的最小、最大限制，以微调和控制 chunk</td>
+</tr>
+<tr>
+<td>MiniChunkSizePlugin</td>
+<td>确保 chunk 大小不超过指定限制</td>
+</tr>
+<tr>
+<td>MiniCssExtractPlugin</td>
+<td>提取 CSS 到一个单独文件中</td>
+</tr>
+<tr>
+<td>NoEmitOnErrorsPlugin</td>
+<td>在输出阶段时，遇到编译错误跳过</td>
+</tr>
+<tr>
+<td>NormalModuleReplacePlugin</td>
+<td>替换与正则表达式匹配的资源</td>
+</tr>
+</tbody></table>
+<h3 id="9-2-手写一个-plugin"><a href="#9-2-手写一个-plugin" class="headerlink" title="9.2. 手写一个 plugin:"></a>9.2. 手写一个 plugin:</h3><h4 id="9-2-1-从-html-webpack-plugin-源码中了解一个-plugin-的基本结构："><a href="#9-2-1-从-html-webpack-plugin-源码中了解一个-plugin-的基本结构：" class="headerlink" title="9.2.1. 从 html-webpack-plugin 源码中了解一个 plugin 的基本结构："></a>9.2.1. 从 html-webpack-plugin 源码中了解一个 plugin 的基本结构：</h4><p><img src="https://s2.loli.net/2024/02/01/Ecjmr4ANixML6wK.png" alt="a4fd0df4f28ef2849cd232f511013fb.png"></p>
 <p><img src="https://s2.loli.net/2024/02/01/5gyhrTGeKCajDXd.png" alt="cb711427a9240e1c21cb8de26ba875a.png"></p>
 <p>源码中，使用的是 Class 类的方式来书写插件 <code>html-webpack-plugin</code> ，我们将一个功能性的函数缩起来，可以清晰得看到，其实，插件就是一个 apply() 的 Javascript 代码，在 apply() 中传入参数 compiler，然后我们可以在 compiler 对象上绑定一些 hooks 实现订阅，当监听到响应的 hooks 时，就会执行相应的插件来干预 webpack 的执行结果，达到实现某种特定功能的拓展效果。</p>
-<h3 id="2-如何编写一个自己的-Plugin："><a href="#2-如何编写一个自己的-Plugin：" class="headerlink" title="2. 如何编写一个自己的 Plugin："></a>2. 如何编写一个自己的 Plugin：</h3><p>由于<code>webpack</code>基于发布订阅模式，在运行的生命周期中会广播出许多事件，插件通过简听这些事件，就可以在特定阶段执行自己的插件任务。</p>
+<h4 id="9-2-2-如何编写一个自己的-Plugin："><a href="#9-2-2-如何编写一个自己的-Plugin：" class="headerlink" title="9.2.2. 如何编写一个自己的 Plugin："></a>9.2.2. 如何编写一个自己的 Plugin：</h4><p>由于<code>webpack</code>基于发布订阅模式，在运行的生命周期中会广播出许多事件，插件通过简听这些事件，就可以在特定阶段执行自己的插件任务。</p>
 <p>在这之前，我们也了解过，<code>webpack</code>编译会创建 2 个核心对象：</p>
 <ul>
 <li><p><code>compiler</code>：包含了<code>webpack</code>环境的所有的配置信息，包含<code>options</code>,<code>loader</code>,<code>plugin</code>和 webpack 整个生命周期中相关的钩子。</p>
@@ -782,10 +870,36 @@
 </ul>
 <p><strong>注意</strong>：服务器与服务器之间请求数据并不会存在跨域行为，跨域行为是浏览器安全策略的限制。</p>
 <h2 id="11-Loader"><a href="#11-Loader" class="headerlink" title="11. Loader"></a>11. <code>Loader</code></h2><p><code>Loader</code>是一个文件加载器，加载资源文件，并对这些文件进行一些处理，如：编译、压缩等，最终打包到指定文件中。</p>
-<h3 id="11-1-常见的-Loader："><a href="#11-1-常见的-Loader：" class="headerlink" title="11.1. 常见的 Loader："></a>11.1. 常见的 Loader：</h3><h4 id="raw-loader"><a href="#raw-loader" class="headerlink" title="raw-loader"></a><code>raw-loader</code></h4><p>在<code>webpack</code>中设置项目通过<code>import</code>方式导入文件内容</p>
+<h3 id="11-1-配置方式："><a href="#11-1-配置方式：" class="headerlink" title="11.1. 配置方式："></a>11.1. 配置方式：</h3><p>一般我们是写在<code>module.rules</code>属性中：</p>
+<ul>
+<li><code>rules</code>是一个数组的形式，因此，我们可以配置很多个<code>loader</code>；</li>
+<li>每个<code>loader</code>对应一个对象的形式，对象属性<code>test</code>为匹配的规则，一般情况下为正则表达式；</li>
+<li>属性<code>use</code>针对匹配到文件类型，调用对应的<code>loader</code>进行处理。</li>
+</ul>
+<p><strong>特性：</strong></p>
+<ul>
+<li><code>loader</code>支持<code>链式调用</code>，链中的每个 loader 会处理之前已处理过的资源，最终转为 JS 代码，顺序为相反的顺序执行</li>
+<li>loader 可以是同步的，也可以是异步的</li>
+<li>loader 运行在 nodeJS 中，并且能够执行任何操作</li>
+<li>除了常见的通过<code>package.json</code>的<code>main</code>来将一个 npm 模块导出为 loader，还可以在<code>module.rules</code>中使用 loader 字段来直接引用</li>
+<li>还可以通过 loader 的预处理函数，为 JS 生态系统提供更多能力。用户可以更加灵活的引入细粒度逻辑，例如：压缩、打包、语言和其他更多特性</li>
+</ul>
+<h3 id="11-2-常见的-Loader："><a href="#11-2-常见的-Loader：" class="headerlink" title="11.2. 常见的 Loader："></a>11.2. 常见的 Loader：</h3><h4 id="style-loader"><a href="#style-loader" class="headerlink" title="style-loader"></a><code>style-loader</code></h4><p>将 css 添加到 DOM 的内联样式标签 style 里</p>
+<h4 id="css-loader"><a href="#css-loader" class="headerlink" title="css-loader"></a><code>css-loader</code></h4><p>允许将 css 文件通过 require 的方式引入，并返回 css 代码</p>
+<h4 id="less-loader"><a href="#less-loader" class="headerlink" title="less-loader"></a><code>less-loader</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">    <span class="attr">use</span>: [<span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>, <span class="string">&#x27;less-loader&#x27;</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>同一个任务的 loader 可以同时挂载多个，处理顺序：<code>从右到左，从下到上</code>。</p>
+<p><strong>问题</strong>：如果只使用 css-loader 加载文件，则页面样式不会生效，为什么呢？</p>
+<p><strong>原因</strong>：</p>
+<p>css-loader 只负责将.css 文件进行解析，而不会将解析后的 css 插入到页面中；如果我们希望完成插入 style 的操作，需要引入 style-loader</p>
+<h4 id="sass-loader"><a href="#sass-loader" class="headerlink" title="sass-loader"></a><code>sass-loader</code></h4><h4 id="raw-loader"><a href="#raw-loader" class="headerlink" title="raw-loader"></a><code>raw-loader</code></h4><p>在<code>webpack</code>中设置项目通过<code>import</code>方式导入文件内容</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line"> ...,</span><br><span class="line"> <span class="attr">module</span>: &#123;</span><br><span class="line">  <span class="attr">rules</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.(txt|md)$/</span>,</span><br><span class="line">    <span class="attr">use</span>: <span class="string">&#x27;raw-loader&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="11-2-手写Loader"><a href="#11-2-手写Loader" class="headerlink" title="11.2. 手写Loader"></a>11.2. 手写<code>Loader</code></h3><p>在编写<code>Loader</code>之前，我们需要先了解<code>loader</code>的本质，</p>
+<h4 id="file-loader"><a href="#file-loader" class="headerlink" title="file-loader"></a><code>file-loader</code></h4><p>把识别出的资源模块，移动到制定和的输出目录，并且返回这个资源在输出目录的地址（字符串）</p>
+<h4 id="url-loader"><a href="#url-loader" class="headerlink" title="url-loader"></a><code>url-loader</code></h4><p>处理 file-loader 所有的事情，但是遇到图片格式的模块，可以选择地把图片转为 base 64 格式的字符串，并打包到 js 中，对小体积的图片比较适合，大图片不合适。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules</span>:[</span><br><span class="line">  ...,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.(png|jpe?g|gif)$/</span>,</span><br><span class="line">    <span class="attr">use</span>: &#123;</span><br><span class="line">      <span class="attr">loader</span>: <span class="string">&quot;url-loader&quot;</span>,</span><br><span class="line">      <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="comment">// placeholder 占位符[name]资源模块的名字</span></span><br><span class="line">        <span class="comment">// [ext]资源模块的后缀</span></span><br><span class="line">        <span class="attr">name</span>:<span class="string">&quot;[name]_[hash].[ext]&quot;</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打包后存放的位置</span></span><br><span class="line">        <span class="attr">outputPath</span>:<span class="string">&quot;./images&quot;</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打包后文件的url</span></span><br><span class="line">        <span class="attr">publicPath</span>: <span class="string">&#x27;./images&#x27;</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 小于100字节转为base64格式</span></span><br><span class="line">        <span class="attr">limit</span>: <span class="number">100</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-3-手写Loader"><a href="#11-3-手写Loader" class="headerlink" title="11.3. 手写Loader"></a>11.3. 手写<code>Loader</code></h3><p>在编写<code>Loader</code>之前，我们需要先了解<code>loader</code>的本质，</p>
 <p>其本质为 <code>函数</code>，函数中的<code>this</code>作为上下文会被<code>webpack</code>填充，因此，我们不能将<code>loader</code>设为一个箭头函数。</p>
 <p>函数接收一个参数，为<code>webpack</code>传递给<code>loader</code>的文件源内容；</p>
 <p>函数中的<code>this</code>是由<code>webpack</code>提供的对象，能够获取当前<code>loader</code>所需的各种信息；</p>
