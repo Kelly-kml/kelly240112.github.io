@@ -775,7 +775,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-27 11:58:16" itemprop="dateModified" datetime="2024-02-27T11:58:16+08:00">2024-02-27</time>
+                <time title="修改时间：2024-02-28 16:06:29" itemprop="dateModified" datetime="2024-02-28T16:06:29+08:00">2024-02-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -997,6 +997,15 @@
 <li>将所有 updated modules 标记为 无效。对于每个无效 module，都需要在模块中有一个 update handler ，或者在此模块的父级模块中有 update handler。否则，会进行无效标记冒泡，并且父级也会被标记为无效。继续每个冒泡，直到到达应用程序入口起点，或者到达带有 update handler 的 module（以最先到达为准，冒泡停止）。如果它从入口起点开始冒泡，则此过程失败。</li>
 <li>所有无效 module 都会被（通过 dispose handler）处理和解除加载。然后更新当前 hash，并且调用所有 <code>accept</code> handler。runtime 切换回 <code>idle</code> 状态，一切照常继续。</li>
 </ol>
+<p><strong>HRM 更新的总结：</strong></p>
+<ul>
+<li>通过<code>webpack-dev-server</code>创建两个服务器：提供静态资源的服务（express）和 Socket 服务</li>
+<li>express server 负责直接提供静态资源的服务（打包后的资源直接被浏览器请求和解析）</li>
+<li>socket server 是一个 websocket 的长连接，双方可以通信</li>
+<li>当 socket server 监听到对应的模块发生变化时，会生成两个文件<code>.json</code>(manifest 文件)和<code>.js</code>文件(update chunk)</li>
+<li>通过长连接，socket server 可以直接将这两个文件主动发送给客户端（浏览器）</li>
+<li>浏览器拿到两个新文件后，通过 HMR runtime 机制，加载这两个文件，并且针对修改的模块进行更新</li>
+</ul>
 <h2 id="8-Tree-shaking："><a href="#8-Tree-shaking：" class="headerlink" title="8. Tree-shaking："></a>8. <a target="_blank" rel="noopener" href="https://webpack.docschina.org/guides/tree-shaking/">Tree-shaking</a>：</h2><h3 id="（1）对于-Tree-shaking-是怎么理解的？"><a href="#（1）对于-Tree-shaking-是怎么理解的？" class="headerlink" title="（1）对于 Tree-shaking 是怎么理解的？"></a>（1）对于 Tree-shaking 是怎么理解的？</h3><p><strong>tree shaking</strong> 是一种基于 ES Module 规范的 Dead Code Elimination 技术，通常用于描述移除 JavaScript 上下文中的死代码（不使用的代码）。具体是通过在运行过程中静态分析模块之间的导入导出，确定 ESM 模块中哪些导出值未曾被其他模块使用过，并将其删除，以此实现打包产物的优化。</p>
 <p>我们打一个形象的比方：将应用程序想象成一棵树。绿色表示实际用到的源码和库，是树上活的树叶。灰色表示未引用代码，是秋天树上枯萎的树叶。为了除去死去的树叶，你必须摇动（shake）这棵树，使它们落下。</p>
 <h3 id="（2）实现原理："><a href="#（2）实现原理：" class="headerlink" title="（2）实现原理："></a>（2）实现原理：</h3><p>Webapck 中， Tree-shaking 的实现的关键是：</p>
@@ -1722,7 +1731,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-01 16:23:31" itemprop="dateModified" datetime="2024-02-01T16:23:31+08:00">2024-02-01</time>
+                <time title="修改时间：2024-03-14 15:15:59" itemprop="dateModified" datetime="2024-03-14T15:15:59+08:00">2024-03-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1824,6 +1833,21 @@
 <ul>
 <li>时间复杂度：O(n)。双指针最多遍历完整个数组一次。</li>
 <li>空间复杂度：O(1)。只需要额外的常数级别来存储指针的空间。</li>
+</ul>
+<h2 id="移动零"><a href="#移动零" class="headerlink" title="移动零"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/description">移动零</a></h2><p>解题思路：</p>
+<p>使用双指针，左指针指向当前已经处理好的序列的尾部，右指针指向待处理序列的头部。</p>
+<p>右指针不断向右移动，每次右指针指向非零数，则将左右指针指向对应的数交换，同时左指针右移。</p>
+<p>⚠️ 注意：</p>
+<ul>
+<li>左指针左边均为非零数；</li>
+<li>右指针左边直到左指针处均为 0</li>
+</ul>
+<p>因此，每次交换，都是将左指针的零与右指针的非零数交换，且非零数的相对顺序并未改变</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number[]</span>&#125; <span class="variable">nums</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">void</span>&#125; Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> moveZeroes = <span class="keyword">function</span> (<span class="params">nums</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> n = nums.<span class="property">length</span>,</span><br><span class="line">    left = <span class="number">0</span>,</span><br><span class="line">    right = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (right &lt; n) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[right] != <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="title function_">swap</span>(nums, left, right);</span><br><span class="line">      left++;</span><br><span class="line">    &#125;</span><br><span class="line">    right++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">swap</span> = (<span class="params">nums, left, right</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> temp = nums[left];</span><br><span class="line">  nums[left] = nums[right];</span><br><span class="line">  nums[right] = temp;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)，其中<code>n</code> 为序列长度，每个位置至多被遍历两次。</li>
+<li>空间复杂度：O(1)，只需要常数的空间存放若干位置。</li>
 </ul>
 
       
