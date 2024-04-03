@@ -123,17 +123,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
+    <a href="/kelly240112.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/kelly240112.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/kelly240112.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+    <a href="/kelly240112.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -185,6 +185,235 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/04/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/kelly240112.github.io/images/avatar.jpg">
+      <meta itemprop="name" content="kelly">
+      <meta itemprop="description" content="野孩子玩耍的殿堂">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宫崎骏的捣蛋野孩子">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/kelly240112.github.io/articles/2024/04/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">浏览器机制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-03 15:46:44 / 修改时间：16:50:03" itemprop="dateCreated datePublished" datetime="2024-04-03T15:46:44+08:00">2024-04-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/kelly240112.github.io/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>说到浏览器渲染机制，不外乎两个关键方面需要知道：</p>
+<ul>
+<li>浏览器如何渲染页面</li>
+<li>有哪些提高浏览器渲染性能的方法</li>
+</ul>
+<h2 id="回答关键词："><a href="#回答关键词：" class="headerlink" title="回答关键词："></a>回答关键词：</h2><p><code>DOM</code> <code>CSSOM</code> <code>脚本执行与界面渲染互斥</code> <code>渲染树</code> <code>Compositing</code> <code>GPU 加速</code></p>
+<p>当浏览器进程获取到 HTML 的第一个字节开始，会通知渲染进程开始解析 HTML，将 HTML 转换成 DOM 树，并进入渲染流程。一般所有的浏览器都会经过五大步骤，分别是：</p>
+<ol>
+<li>PARSE：解析 HTML，构建 DOM 树。</li>
+<li>STYLE：为每个节点计算最终的有效样式。</li>
+<li>LAYOUT：为每个节点计算位置和大小等布局信息。</li>
+<li>PAINT：绘制不同的盒子，为了避免不必要的重绘，将会分成多个层进行处理。</li>
+<li>COMPOSITE &amp; RENDER：将上述不同的层合成为一张位图，发送给 GPU，渲染到屏幕上。</li>
+</ol>
+<p>为了提高浏览器的渲染性能，通常的手段是保证渲染流程不被阻塞，避免不必要的绘制计算和重排重绘，利用 GPU 硬件加速等技术来提高渲染性能。</p>
+<h2 id="知识点深入"><a href="#知识点深入" class="headerlink" title="知识点深入"></a>知识点深入</h2><h3 id="浏览器的渲染流程"><a href="#浏览器的渲染流程" class="headerlink" title="浏览器的渲染流程"></a>浏览器的渲染流程</h3><p>Chromium 的渲染流程的主要步骤如下图所示：</p>
+<p><img src="https://s2.loli.net/2024/04/03/N6ldeCqJF8MgYHf.png" alt="f65bdaafcc1760fc534b48d4d7c872b.png"></p>
+<h4 id="Parse-阶段：解析-HTML"><a href="#Parse-阶段：解析-HTML" class="headerlink" title="Parse 阶段：解析 HTML"></a>Parse 阶段：解析 HTML</h4><p><strong>构建 DOM 树</strong></p>
+<p>渲染进程主线程解析 HTML 并构建出结构化的树状数据结构 DOM 树，需要经历以下几个步骤：</p>
+<ol>
+<li>Conversion（转换）：浏览器从网络或磁盘读取 HTML 文件原始字节，根据指定的文件编码（如 UTF-8）将字节转换成字符。</li>
+<li>Tokenizing（分词）：浏览器根据 HTML 规范将字符串转换为不同的标记（如 <html>, <body>）。</li>
+<li>Lexing（语法分析）：上一步产生的标记将被转换为对象，这些对象包含了 HTML 语法的各种信息，如属性、属性值、文本等。</li>
+<li>DOM construction（DOM 构造）：因为 HTML 标记定义了不同标签之间的关系，上一步产生的对象会链接在一个树状数据结构中，以标识父子、兄弟关系。</li>
+</ol>
+<p>构建 DOM 的流程如下图所示:</p>
+<p><img src="https://s2.loli.net/2024/04/03/jfcAwWeUFSMB1L3.png" alt="e1cc81136cf4ef6b19827d1105f4f30.png"></p>
+<p><strong>次级资源加载</strong></p>
+<p>一个网页通常会使用多个外部资源，如图片、JavaScript、CSS、字体等。主线程在解析 DOM 的过程中遇到这些资源后会一一请求。为了加速渲染流程，会有一个叫做预加载扫描器（preload scanner）线程并发运行。如果 HTML 中存在 img 或 link 之类的内容，则预加载扫描器会查看 HTML parser 生成的标记，并发送请求到浏览器进程的网络线程获取这些资源。</p>
+<p><strong>JavaScript 可能阻塞解析</strong></p>
+<p>当 HTML 解析器发现 script 标签时，会暂停 HTML 的解析，转而开始加载、解析和执行 JavaScript。因为 JS 可能会改变 DOM 的结构。如果不想因 JS 阻塞 HTML 的解析，可以为 script 标签添加 defer 属性或将 script 放在 body 结束标签之前，浏览器会在最后执行 JS 代码，避免阻塞 DOM 构建。</p>
+<h4 id="Style-阶段：样式计算"><a href="#Style-阶段：样式计算" class="headerlink" title="Style 阶段：样式计算"></a>Style 阶段：样式计算</h4><p>CSS 引擎处理样式的过程分为三个阶段：</p>
+<ol>
+<li>收集、划分和索引所有样式表中存在的样式规则，CSS 引擎会从 style 标签，css 文件及浏览器代理样式中收集所有的样式规则，并为这些规则建立索引，以方便后续的高效查询。</li>
+<li>访问每个元素并找到适用于该元素的所有规则，CSS 引擎遍历 DOM 节点，进行选择器匹配，并为匹配的节点执行样式设置。</li>
+<li>结合层叠规则和其他信息为节点生成最终的计算样式，这些样式的值可以通过 window.getComputedStyle() 获取。</li>
+</ol>
+<p>在大型网站中，会存在大量的 CSS 规则，如果为每个节点都保存一份样式值，会导致内存消耗过大。作为替代，CSS 引擎通常会创建共享的样式结构，计算样式对象一般有指针指向相同的共享结构。</p>
+<p>附加了计算样式的 DOM 树，一般被称为 CSSOM（CSS Object Model）：</p>
+<p><img src="https://s2.loli.net/2024/04/03/8hVH2oFKJbOqfyt.png" alt="72562309c3225c1f0c0362b7f915421.png"></p>
+<p>CSSOM 和 DOM 是并行构建的，构建 CSSOM 不会阻塞 DOM 的构建。但 CSSOM 会阻塞 JS 的执行，因为 JS 可能会操作样式信息。虽然 CSSOM 不会阻塞 DOM 的构建，但在进入下一阶段之前，必须等待 CSSOM 构建完成。这也是通常所说的 CSSOM 会阻塞渲染。</p>
+<h4 id="Layout-阶段"><a href="#Layout-阶段" class="headerlink" title="Layout 阶段"></a>Layout 阶段</h4><p><strong>创建 LayoutObject（RenderObject） 树</strong></p>
+<p>有了 DOM 树和 DOM 树中元素的计算样式后，浏览器会根据这些信息合并成一个 layout 树，收集所有可见的 DOM 节点，以及每个节点的所有样式信息。</p>
+<p>Layout 树和 DOM 树不一定是一一对应的，为了构建 Layout 树，浏览器主要完成了下列工作：</p>
+<ol>
+<li>从 DOM 树的根节点开始遍历每个可见节点。</li>
+</ol>
+<ul>
+<li>某些不可见节点（例如 script、head、meta 等），它们不会体现在渲染输出中，会被忽略。</li>
+<li>某些通过设置 display 为 none 隐藏的节点，在渲染树中也会被忽略。</li>
+<li>为伪元素创建 LayoutObject。</li>
+<li>为行内元素创建匿名包含块对应的 LayoutObject。</li>
+</ul>
+<ol start="2">
+<li>对于每个可见节点，为其找到适配的 CSSOM 规则并应用它们。</li>
+<li>产出可见节点，包含其内容和计算的样式。</li>
+</ol>
+<p><img src="https://s2.loli.net/2024/04/03/mKC2SsT6LUGxBAq.png" alt="6509bb3ab1f53317bf5c5d92db7720d.png"></p>
+<p><strong>布局计算</strong></p>
+<p>上一步计算了可见的节点及其样式，接下来需要计算它们在设备视口内的确切位置和大小，这个过程一般被称为自动重排。</p>
+<p>浏览器的布局计算工作包含以下内容：</p>
+<p>根据 CSS 盒模型及视觉格式化模型，计算每个元素的各种生成盒的大小和位置。</p>
+<ol>
+<li>计算块级元素、行内元素、浮动元素、各种定位元素的大小和位置。</li>
+<li>计算文字，滚动区域的大小和位置。</li>
+<li>LayoutObject 有两种类型：</li>
+</ol>
+<ul>
+<li>传统的 LayoutObject 节点，会把布局运算的结果重新写回布局树中。</li>
+<li>LayoutNG（Chrome 76 开始启用） 节点的输出是不可变的，会保存在 NGLayoutResult 中，这是一个树状的结构，相比之前的 LayoutObject，少了很大回溯计算，提高了性能。</li>
+</ul>
+<h4 id="Paint-阶段"><a href="#Paint-阶段" class="headerlink" title="Paint 阶段"></a>Paint 阶段</h4><p>Paint 阶段将 LayoutObject 树转换成供合成器使用的高效渲染格式，包括一个包含 display item 列表的 cc::Layers 列表，与该列表与 cc::PropertyTrees 关联。</p>
+<p><strong>构建 PaintLayer（RenderLayer） 树</strong></p>
+<p>构建完成的 LayoutObject 树还不能拿去显示，因为它不包含绘制的顺序（z-index）。同时，也为了考虑一些复杂的情况，如 3D 变换、页面滚动等，浏览器会对上一步的节点进行分层处理。这个处理过程被称为建立层叠上下文。</p>
+<p>浏览器会根据 CSS 层叠上下文规范，建立层叠上下文，常见情况如下：</p>
+<ol>
+<li>DOM 树的 Document 节点对应的 RenderView 节点。</li>
+<li>DOM 树中 Document 节点的子节点，也就是 HTML 节点对应的 RenderBlock 节点。</li>
+<li>显式指定 CSS 位置的节点（position 为 absolute 或者 fixed）。</li>
+<li>具有透明效果的节点。</li>
+<li>具有 CSS 3D 属性的节点。</li>
+<li>使用 Canvas 元素或者 Video 元素的节点。</li>
+</ol>
+<p>浏览器遍历 LayoutObject 树的时候，建立了 PaintLayer 树，LayoutObject 与 PaintLayer 也不一定是一一对应的。每个 LayoutObject 要么与自己的 PaintLayer 关联，要么与拥有 PaintLayer 的第一个祖先的 PaintLayer 关联。</p>
+<p><strong>构建 cc::Layer 与 display items</strong></p>
+<p>浏览器会继续根据 PaintLayer 树创建 cc::Layer 列表。cc::Layer 是列表状结构，每个 layer 包含了个 DisplayItem 列表，每个 DisplayItem 包含了实际的 paint op 指令。将页面分层，可以让一个图层独立于其他的图层进行变换和光栅化处理。</p>
+<ol>
+<li>合成更新（Compositing update）</li>
+</ol>
+<ul>
+<li>依据 PaintLayer 决定分层（GraphicsLayers）</li>
+<li>这个策略被称为 CompositeBeforePaint，未来会被 CompositeAfterPaint 替代。</li>
+</ul>
+<ol start="2">
+<li>PrePaint</li>
+</ol>
+<ul>
+<li>PaintInvalidator 进行失效检查，找出需要绘制的 display items。</li>
+<li>构建 paint property 树，该树能使动画、页面滚动，clip 等变化仅在合成线程运行，提高性能。</li>
+</ul>
+<p><img src="https://s2.loli.net/2024/04/03/6osNFymSBMiRVPt.png" alt="6a637407b4bb2ef8f1cf3e958fca473.png"></p>
+<ol start="3">
+<li>Paint</li>
+</ol>
+<ul>
+<li>遍历 LayoutObject 树并创建 display items 列表。</li>
+<li>为共享同样 property tree 状态的 display items 列表创建 paint chunks 分组。</li>
+<li>将结果 commit 到 compositor。</li>
+<li>CompositeAfterPaint 将在此时决定分层。</li>
+<li>将 paint chunks 通过 cc::Layer 列表传递给 compositor。</li>
+<li>将 property 树转换为 cc::PropertyTrees。</li>
+</ul>
+<p>上面的流程中，有两个不同的创建合成层的时机，一个是 paint 之前的 CompositeBeforePaint，该操作在渲染主线程中完成。一个是 paint 之后的 CompositeAfterPaint，后续创建 layer 的操作在 CC（Chromium Compositor）线程中完成。</p>
+<h4 id="合成-Compositing"><a href="#合成-Compositing" class="headerlink" title="合成 Compositing"></a>合成 Compositing</h4><p>合成阶段在 CC（Chromium Compositor）线程中进行。</p>
+<p><strong>commit</strong></p>
+<p>当 Paint 阶段完成后，主线程进入 commit 阶段，将 cc::Layer 中的 layer list 和 property 树更新到 CC 线程的 LayerImpl 中，commit 完成。commit 进行的过程中，主线程被阻塞。</p>
+<p><strong>tiling &amp; raster</strong></p>
+<p>raster（光栅化）是将 display item 中的绘制操作转换为位图的过程。</p>
+<p>光栅化的主要操作流程如下：</p>
+<ol>
+<li>tiling：将 layer 分成 tiles（图块）。 因为有的 layer 可能很大（如整个文档的滚动根节点），对整层的光栅化操作代价昂贵，且 layer 中有的部分是不可见的，会造成不必要的浪费。</li>
+<li>tiles 是光栅化的基本单元。光栅化操作是通过光栅线程池处理的。离视口更近的 tiles 具有更高的优先级，将优先处理。</li>
+<li>一个 layer 实际上会生成多种分辨率的 tiles。</li>
+<li>raster 同样也会处理页面引用的图片资源，display items 中的 paint ops 引用了这些压缩数据，raster 会调用合适的解码器来解压这些数据。</li>
+<li>raster 会通过 Skia 来进行 OpenGL 调用，光栅化数据。</li>
+<li>渲染进程是运行在沙箱中的，不能直接进行系统调用。paint ops 通过 IPC（MOJO）传递给 GPU 进程，GPU 进程会执行真实的 OpenGL（为了保证性能，在 Windows 上转为 DirectX）调用。</li>
+<li>光栅化的位图结果保存在 GPU 内存中，通常作为 OpenGL 材质对象保存。</li>
+<li>双缓冲机制：主线程随时会有 commit 到来，当前的光栅化行为在 pending tree（LayerImpl）上进行，一旦光栅化操作完成，将 pending tree 变为 active tree，后续的 draw 操作在 active tree 上进行。</li>
+</ol>
+<p><strong>draw</strong></p>
+<p>当所有的 tiles 都完成光栅化后，会生成 draw quads（绘制四边形）。每个 draw quads 是包含一个在屏幕特定位置绘制 tile 的命令，该命令同时考虑了所有应用到 layer tree 的变换。每个四边形引用了内存中 tile 的光栅化输出。四边形被包裹在合成帧对象（compositor frame object）中，然后提交（submit）到浏览器进程。</p>
+<p><strong>display compositor（viz，visual 的简称）</strong></p>
+<p>viz 位于 GPU 进程中，viz 接收来自浏览器的合成帧，合成帧来自多个渲染进程，以及浏览器自身 UI 的 compositor。</p>
+<p>合成帧和屏幕上将要绘制的位置关联，该位置叫做 surface。surface 可以嵌套其他 surface，浏览器 UI 的 surface 嵌套了渲染进程的 surface，渲染进程的 surface 嵌套了其他跨域 iframes（同源的 iframe 共享相同的渲染进程） 的 surface。viz 同步传入的帧，并处理嵌套 surfaces 的依赖（surface aggregation）。</p>
+<p>最终的显示流程：</p>
+<ol>
+<li>viz 会发出 OpenGL 调用将合成帧中的 quads 发送到 GPU 线程的 backbuffer 中。</li>
+<li>在新的模式中，viz 会使用 Skia 代替原始 OpenGL 调用。</li>
+<li>在大部分平台上，viz 的输出也是双缓冲结构，draw 首先到达 backbuffer，通过 swapping 操作转换成 frontbuffer 最终显示在屏幕上。</li>
+</ol>
+<p><strong>线程对浏览器事件的处理</strong></p>
+<p>合成的优点是它在不涉及渲染主线程的情况下完成的。合成器不需要等待样式计算或 JavaScript 执行。只和合成相关的动画被认为是获得流畅性能的最佳选择。同时，合成器还负责处理页面的滚动，滚动的时候，合成器会更新页面的位置，并且更新页面的内容。</p>
+<p>当一个没有绑定任何事件的页面发生滚动时，合成器可以独立于渲染主线程之外进行合成帧的的创建，保证页面的流程滚动。当页面中的某一区域绑定了 JS 事件处理程序时，CC 线程会将这一区域标记为 Non-Fast Scrollable Region。如果事件来自于该区域之外，则 CC 线程继续合成新的帧，而无需等待主线程。</p>
+<p>在开发中，我们通常会使用事件委托来简化逻辑，但是这会使整个绑定事件的区域变成 Non-Fast Scrollable Region。为了减轻这种情况对滚动造成的影响，你可以传入 passive: true 选项到事件监听器中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">addEventListener</span>(</span><br><span class="line">  <span class="string">&#x27;touchstart&#x27;</span>,</span><br><span class="line">  <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="property">target</span> === area) &#123;</span><br><span class="line">      event.<span class="title function_">preventDefault</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">passive</span>: <span class="literal">true</span> &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>浏览器渲染大致过程如图所示：</strong></p>
+<p><img src="https://s2.loli.net/2024/04/03/JRLX7AdrfD6IoNt.png" alt=".jpg"></p>
+<p><strong>主要有以下步骤:</strong></p>
+<ol>
+<li><p>首先解析收到的文档，根据文档定义构建一棵 DOM 树，DOM 树是由 DOM 元素及属性节点组成的。</p>
+</li>
+<li><p>然后对 CSS 进行解析，生成 CSSOM 规则树。</p>
+</li>
+<li><p>根据 DOM 树和 CSSOM 规则树构建渲染树。渲染树的节点被称为渲染对象，渲染对象是一个包含有颜色和大小等属性的矩形，渲染对象和 DOM 元素相对应，但这种对应关系不是一对一的，不可见的 DOM 元素不会被插入渲染树。还有一些 DOM 元素对应几个可见对象，它们一般是一些具有复杂结构的元素，无法用一个矩形来描述。</p>
+</li>
+<li><p>当渲染对象被创建并添加到树中，它们并没有位置和大小，所以当浏览器生成渲染树以后，就会根据渲染树来进行布局（也可以叫做回流）。这一阶段浏览器要做的事情是要弄清楚各个节点在页面中的确切位置和大小。通常这一行为也被称为“自动重排”。</p>
+</li>
+<li><p>布局阶段结束后是绘制阶段，遍历渲染树并调用渲染对象的 paint 方法将它们的内容显示在屏幕上，绘制使用 UI 基础组件。</p>
+</li>
+</ol>
+<p>注意：这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的 html 都解析完成之后再去构建和布局 render 树。它是解析完一部分内容就显示一部分内容，同时，可能还在通过网络下载其余内容。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -2226,99 +2455,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kelly-kml.github.io/kelly240112.github.io/articles/2024/01/19/H%E6%8C%87%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/kelly240112.github.io/images/avatar.jpg">
-      <meta itemprop="name" content="kelly">
-      <meta itemprop="description" content="野孩子玩耍的殿堂">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宫崎骏的捣蛋野孩子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/kelly240112.github.io/articles/2024/01/19/H%E6%8C%87%E6%95%B0/" class="post-title-link" itemprop="url">H指数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-01-19 22:44:00" itemprop="dateCreated datePublished" datetime="2024-01-19T22:44:00+08:00">2024-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-21 00:01:53" itemprop="dateModified" datetime="2024-01-21T00:01:53+08:00">2024-01-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/kelly240112.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="H-指数"><a href="#H-指数" class="headerlink" title="H 指数"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/h-index/description/">H 指数</a></h2><p>H 指数的概念：h 代表“高引用次数” ，一名科研人员的 h 指数 是指他（她）至少发表了 h 篇论文，并且 至少 有 h 篇论文被引用次数大于等于 h 。如果 h 有多种可能的值，h 指数 是其中最大的那个。</p>
-<p>输入：citations &#x3D; [3,0,6,1,5]</p>
-<p>输出：3</p>
-<p>解释：给定数组表示研究者总共有 5 篇论文，每篇论文相应的被引用了 3, 0, 6, 1, 5 次。</p>
-<p>由于研究者有 3 篇论文每篇 至少 被引用了 3 次，其余两篇论文每篇被引用 不多于 3 次，所以她的 h 指数是 3。</p>
-<h3 id="1-根据-H-指数的定义直接解题："><a href="#1-根据-H-指数的定义直接解题：" class="headerlink" title="1. 根据 H 指数的定义直接解题："></a>1. 根据 H 指数的定义直接解题：</h3><p>首先先给数组排序，然后根据定义，如果满足 (citationsSort.length - i ) &lt;&#x3D; citationsSort[i] 该条件，那么 citationsSort.length - i 就是 H 指数，即为所求。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number[]</span>&#125; <span class="variable">citations</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> hIndex = <span class="keyword">function</span> (<span class="params">citations</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> citationsSort = citations.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br><span class="line">  <span class="keyword">const</span> len = citationsSort.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (len - i &lt;= citationsSort[i]) &#123;</span><br><span class="line">      <span class="keyword">return</span> len - i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>时间复杂度：O(nlog⁡n)</strong></p>
-<p>其中 n 为数组 citations 的长度。即为排序的时间复杂度。</p>
-<p><strong>空间复杂度：O(nlog⁡n)</strong></p>
-<p>其中 n 为数组 citations 的长度。即为排序的时间复杂度。</p>
-<h3 id="2-二分查找法："><a href="#2-二分查找法：" class="headerlink" title="2. 二分查找法："></a>2. 二分查找法：</h3><p>我们需要找到一个值 h，使得它满足 有 h 篇论文的引用次数至少为 h 。</p>
-<p>其实此题可以转化为 求 h 的最大值，这样子就类似于这个题<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/">二分查找</a></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hIndex = <span class="keyword">function</span> (<span class="params">citations</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = citations.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">let</span> mid = <span class="title class_">Math</span>.<span class="title function_">floor</span>((left + right + <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">let</span> h = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> citations) &#123;</span><br><span class="line">      <span class="keyword">if</span> (v &gt;= mid) &#123;</span><br><span class="line">        h++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (h &gt;= mid) &#123;</span><br><span class="line">      left = mid;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> left;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>时间复杂度：O(nlogn)</strong></p>
-<p>其中 n 为数组 citations 的长度。需要进行 logn 次二分搜索，每次二分搜索需要遍历数组 citations 一次。</p>
-<p><strong>空间复杂度：O(1)</strong></p>
-<p>只需要常数个变量来进行二分搜索。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2390,20 +2526,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/kelly240112.github.io/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/kelly240112.github.io/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/kelly240112.github.io/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
